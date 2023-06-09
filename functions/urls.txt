@@ -8,6 +8,10 @@
   "url": "https://4344bd52-43bf-4240-9523-da3f8329b645-bluemix.cloudantnosqldb.appdomain.cloud",
   "username": "4344bd52-43bf-4240-9523-da3f8329b645-bluemix"
 }
+post review 
+https://us-south.functions.appdomain.cloud/api/v1/web/ed0d15c4-5731-4ba8-bcbe-65da76327b7f/api/create-review
+get review by dealership
+https://us-south.functions.appdomain.cloud/api/v1/web/ed0d15c4-5731-4ba8-bcbe-65da76327b7f/reviews-package/get-reviews?dealerId="6d415a2c54b34616f9981722a63bbe46"
 get by state
 https://us-south.functions.appdomain.cloud/api/v1/web/ed0d15c4-5731-4ba8-bcbe-65da76327b7f/dealership-package/get-dealership?state="Minnesota"
 get all dealerships 
