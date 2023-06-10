@@ -64,7 +64,7 @@ function getMatchingRecords(cloudant, dbname, state) {
     cloudant
       .postFind({ db: dbname, state: state })
       .then((result) => {
-        resolve({ result: result.result.docs });
+        resolve(result.result.docs);
       })
       .catch((err) => {
         console.log(err);
