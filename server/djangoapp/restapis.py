@@ -75,7 +75,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
     results = []
     json_result = get_request(url, dealerId=dealer_id)
     if json_result:
-        reviews = json_result
+        reviews = json_result['body']
         for review in reviews:
             if review["purchase"]:
                 review_obj = DealerReview(
@@ -114,8 +114,8 @@ def analyze_review_sentiments(dealer_review):
     natural_language_understanding = NaturalLanguageUnderstandingV1(
         version='2021-08-01', authenticator=authenticator)
     natural_language_understanding.set_service_url(NLU_URL)
-    response = natural_language_understanding.analyze(text=dealer_review, features=Features(
-        sentiment=SentimentOptions(targets=[dealer_review]))).get_result()
+    response = natural_language_understanding.analyze(text='It is a very good car to drive', features=Features(
+        sentiment=SentimentOptions(targets=['It is a very good car to drive']))).get_result()
     label = json.dumps(response, indent=2)
     label = response['sentiment']['document']['label']
     return(label)

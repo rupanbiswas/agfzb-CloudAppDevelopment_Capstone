@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, get_dealer_from_cf_by_id, post_request
+from .models import CarModel
+
 
 # from .models import related models
 # from .restapis import related methods
@@ -83,7 +85,7 @@ def logout_request(request):
 def get_dealer_details(request, dealer_id):
     if request.method == "GET":
         context = {}
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/ed0d15c4-5731-4ba8-bcbe-65da76327b7f/reviews-package/get-reviews"
+        url = "https://e29b86ca.eu-gb.apigw.appdomain.cloud/api/review/"
         reviews = get_dealer_reviews_from_cf(url, dealer_id)
         context["reviews"] = reviews
         dealer = get_dealer_from_cf_by_id(
@@ -94,7 +96,7 @@ def get_dealer_details(request, dealer_id):
 def add_review(request, dealer_id):
     context = {}
     if request.method == "GET":
-        url = "https://e29b86ca.eu-gb.apigw.appdomain.cloud/api/dealership"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/ed0d15c4-5731-4ba8-bcbe-65da76327b7f/dealership-package/get-dealership"
         dealer = get_dealer_from_cf_by_id(url, dealer_id)
         cars = CarModel.objects.filter(dealer_id=dealer_id)
         context["cars"] = cars
@@ -124,6 +126,7 @@ def add_review(request, dealer_id):
         json_payload = {}
         json_payload["review"] = review
         response = post_request(url, json_payload)
+        print('rupan response',response)
         return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
 
 def get_dealerships(request):
